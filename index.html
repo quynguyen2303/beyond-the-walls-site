@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <meta name="description" content="Beyond the Walls — Mikasa stands guard over one builder's public expedition from $0 to $1,000 MRR. $0 budget, AI tools only, PracticeLoop built in the open, wall by wall." />
+    <title>Beyond the Walls — $0 to $1,000 MRR Expedition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --parchment: #f4ead3;
+        --parchment-deep: #ecdcba;
+        --paper-card: #fbf5e4;
+        --ink: #2e2a20;
+        --ink-soft: #5c5544;
+        --stone: #8a7d63;
+        --stone-dark: #4c4433;
+        --survey: #2f5d3a;
+        --survey-bright: #3e7a4c;
+        --brass: #b8862f;
+        --brass-bright: #d9a441;
+        --red: #9c2b23;
+        --red-bright: #c0392b;
+        --wall-top: #a3936f;
+        --wall-face: #8f8265;
+        --wall-shadow: #6d6249;
+        --line: #d8c9a3;
+        --bar-track: #e3d5b0;
+        --shadow: 0 10px 30px rgba(62, 50, 25, .14);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --parchment: #211d15;
+          --parchment-deep: #1a1710;
+          --paper-card: #2b2619;
+          --ink: #efe6cd;
+          --ink-soft: #c9bb97;
+          --stone: #9c8f6f;
+          --stone-dark: #d8c9a3;
+          --survey: #7fb98a;
+          --survey-bright: #9fd3a9;
+          --brass: #d9a441;
+          --brass-bright: #eec26a;
+          --red: #e08a7d;
+          --red-bright: #f0968a;
+          --wall-top: #57503c;
+          --wall-face: #453f30;
+          --wall-shadow: #322d20;
+          --line: #4a4330;
+          --bar-track: #3d3727;
+          --shadow: 0 10px 30px rgba(0, 0, 0, .45);
+        }
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        font-family: "Source Sans 3", system-ui, sans-serif;
+        background:
+          radial-gradient(1200px 500px at 50% -80px, var(--parchment-deep), transparent 70%),
+          var(--parchment);
+        color: var(--ink);
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+      }
+      .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px 72px; }
+      h1, h2, h3 { font-family: "Playfair Display", Georgia, serif; line-height: 1.12; margin: 0; }
+      p { margin: 0; }
+
+      /* ---------- Wall-brick header band ---------- */
+      .wallband {
+        height: 54px;
+        background:
+          linear-gradient(var(--wall-top), var(--wall-top)) top / 100% 10px no-repeat,
+          repeating-linear-gradient(90deg, transparent 0 62px, rgba(0,0,0,.14) 62px 64px),
+          repeating-linear-gradient(0deg, transparent 0 20px, rgba(0,0,0,.14) 20px 22px),
+          linear-gradient(var(--wall-face), var(--wall-shadow));
+        border-bottom: 3px solid var(--stone-dark);
+      }
+      .wallband.small { height: 34px; opacity: .85; }
+
+      /* ---------- Mascot ---------- */
+      .mascot-stage {
+        display: flex; align-items: flex-end; justify-content: center; gap: 6px;
+        padding: 34px 16px 0;
+      }
+      .mascot { width: 168px; height: auto; flex: none; pointer-events: none; }
+      .bubble {
+        position: relative;
+        max-width: 300px;
+        background: var(--paper-card);
+        border: 2px solid var(--brass);
+        border-radius: 14px;
+        padding: 12px 16px;
+        font-size: 1.02rem; font-weight: 600;
+        box-shadow: var(--shadow);
+        margin-bottom: 66px;
+      }
+      .bubble::before {
+        content: ""; position: absolute; left: -11px; bottom: 26px;
+        width: 18px; height: 18px; rotate: 45deg;
+        background: var(--paper-card);
+        border-left: 2px solid var(--brass); border-bottom: 2px solid var(--brass);
+      }
+      .bubble .who { display: block; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--red); font-weight: 700; margin-bottom: 3px; }
+
+      @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+      @keyframes bounceHop { 0%, 82%, 100% { transform: translateY(0); } 88% { transform: translateY(-16px); } 94% { transform: translateY(-3px); } }
+      @keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.08); } }
+      @keyframes wave { 0%, 60%, 100% { transform: rotate(0deg); } 70% { transform: rotate(-22deg); } 80% { transform: rotate(10deg); } 90% { transform: rotate(-16deg); } }
+      @keyframes scarfFlutter { 0%,100% { transform: rotate(0deg) skewX(0deg); } 30% { transform: rotate(-5deg) skewX(-4deg); } 60% { transform: rotate(3deg) skewX(3deg); } }
+      @keyframes scarfTip { 0%,100% { transform: rotate(0deg); } 40% { transform: rotate(-11deg); } 70% { transform: rotate(6deg); } }
+      .m-bob { animation: bob 3.2s ease-in-out infinite; }
+      .m-hop { animation: bounceHop 5.5s ease-in-out infinite; transform-origin: 100px 208px; }
+      .m-eyes { animation: blink 4.6s ease-in-out infinite; transform-origin: 100px 92px; }
+      .m-arm-wave { animation: wave 3.8s ease-in-out infinite; transform-origin: 138px 138px; }
+      .m-scarf { animation: scarfFlutter 2.6s ease-in-out infinite; transform-origin: 74px 118px; }
+      .m-scarf-tip { animation: scarfTip 2.6s ease-in-out infinite; transform-origin: 40px 128px; }
+      @media (prefers-reduced-motion: reduce) {
+        .m-bob, .m-hop, .m-eyes, .m-arm-wave, .m-scarf, .m-scarf-tip { animation: none; }
+        html { scroll-behavior: auto; }
+      }
+
+      /* ---------- Hero ---------- */
+      .hero { text-align: center; padding: 26px 8px 8px; }
+      .hero .kicker {
+        font-family: "IBM Plex Mono", monospace; font-size: .8rem; font-weight: 600;
+        letter-spacing: .22em; text-transform: uppercase; color: var(--survey);
+      }
+      .hero h1 { font-size: clamp(2.6rem, 9vw, 4.4rem); font-weight: 800; margin-top: 10px; }
+      .hero h1 .walls-word { color: var(--red); font-style: italic; }
+      .hero .sub { font-size: clamp(1.08rem, 3.4vw, 1.3rem); color: var(--ink-soft); max-width: 620px; margin: 14px auto 0; }
+      .status-line {
+        display: inline-block; margin-top: 20px;
+        font-family: "IBM Plex Mono", monospace; font-size: .82rem; font-weight: 600;
+        background: var(--paper-card); border: 1.5px dashed var(--brass);
+        padding: 7px 14px; border-radius: 999px; color: var(--stone-dark);
+      }
+      .mission {
+        margin: 30px auto 0; max-width: 680px; text-align: left;
+        background: var(--paper-card); border: 1px solid var(--line); border-top: 5px solid var(--survey);
+        border-radius: 10px; padding: 22px 24px; box-shadow: var(--shadow);
+        font-size: 1.04rem;
+      }
+      .mission strong { color: var(--survey); }
+      .mission .rule {
+        margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line);
+        font-weight: 600;
+      }
+      .mission .rule em { color: var(--red); font-style: normal; }
+      .fact-row {
+        display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 22px;
+      }
+      .fact {
+        background: var(--paper-card); border: 1px solid var(--line); border-radius: 10px;
+        padding: 10px 16px; text-align: center; min-width: 128px;
+      }
+      .fact .n { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 1.12rem; color: var(--stone-dark); display: block; }
+      .fact .l { font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+
+      /* ---------- Sections ---------- */
+      section { margin-top: 56px; }
+      .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 6px; }
+      .sec-head h2 { font-size: clamp(1.7rem, 5.4vw, 2.3rem); font-weight: 800; }
+      .sec-head .rule-line { flex: 1; height: 2px; background: var(--line); align-self: center; }
+      .sec-sub { color: var(--ink-soft); max-width: 640px; }
+
+      /* ---------- Walls ---------- */
+      .wall-card {
+        background: var(--paper-card); border: 1px solid var(--line); border-radius: 12px;
+        box-shadow: var(--shadow); padding: 22px 22px 18px; margin-top: 18px; overflow: hidden;
+      }
+      .wall-card .wall-top-strip {
+        height: 16px; margin: -22px -22px 16px;
+        background:
+          repeating-linear-gradient(90deg, transparent 0 46px, rgba(0,0,0,.13) 46px 48px),
+          linear-gradient(var(--wall-top), var(--wall-face));
+        border-bottom: 2px solid var(--wall-shadow);
+      }
+      .wall-card header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 14px; }
+      .wall-card h3 { font-size: 1.45rem; font-weight: 800; }
+      .wall-card .wall-role { font-size: .8rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--brass); }
+      .wall-card .pct {
+        margin-left: auto; font-family: "IBM Plex Mono", monospace; font-weight: 600;
+        font-size: 1rem; color: var(--red);
+        background: var(--parchment); border: 1px solid var(--line); border-radius: 8px; padding: 3px 10px;
+      }
+      .metric { margin-top: 16px; }
+      .metric .m-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+      .metric .m-name { font-weight: 600; }
+      .metric .m-val { font-family: "IBM Plex Mono", monospace; font-size: .92rem; color: var(--ink-soft); white-space: nowrap; }
+      .metric .m-val b { color: var(--ink); font-size: 1.05rem; }
+      .bar {
+        margin-top: 6px; height: 16px; border-radius: 5px; overflow: hidden;
+        background:
+          repeating-linear-gradient(90deg, transparent 0 34px, rgba(0,0,0,.08) 34px 36px),
+          var(--bar-track);
+        border: 1px solid var(--line);
+      }
+      .bar .fill {
+        height: 100%; width: 0%;
+        background: linear-gradient(90deg, var(--survey), var(--survey-bright));
+        border-right: 3px solid var(--brass-bright);
+      }
+      .gate-note {
+        margin-top: 20px; text-align: center; font-size: 1.05rem; font-weight: 600;
+        color: var(--stone-dark);
+        background: var(--parchment); border: 1.5px dashed var(--brass); border-radius: 10px; padding: 14px 18px;
+      }
+
+      /* ---------- Journal ---------- */
+      .journal-entry {
+        background: var(--paper-card); border: 1px solid var(--line); border-left: 6px solid var(--red);
+        border-radius: 10px; box-shadow: var(--shadow); padding: 24px 26px; margin-top: 18px;
+      }
+      .journal-entry .j-meta {
+        display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+        font-family: "IBM Plex Mono", monospace; font-size: .8rem; font-weight: 600; color: var(--ink-soft);
+      }
+      .day-badge {
+        background: var(--red); color: #fff; border-radius: 6px; padding: 2px 9px;
+        font-family: "IBM Plex Mono", monospace; font-size: .78rem; font-weight: 600; letter-spacing: .06em;
+      }
+      @media (prefers-color-scheme: dark) { .day-badge { color: #1a1710; background: var(--red-bright); } }
+      .journal-entry h3 { font-size: 1.5rem; font-weight: 800; margin-top: 10px; }
+      .journal-entry .j-body { margin-top: 12px; font-size: 1.03rem; }
+      .journal-note { margin-top: 14px; color: var(--ink-soft); font-style: italic; }
+
+      /* ---------- Daily operations log ---------- */
+      .ops-day {
+        background: var(--paper-card); border: 1px solid var(--line); border-radius: 10px;
+        box-shadow: var(--shadow); padding: 20px 22px 8px; margin-top: 18px;
+      }
+      .ops-day .ops-meta {
+        display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+        font-family: "IBM Plex Mono", monospace; font-size: .8rem; font-weight: 600; color: var(--ink-soft);
+      }
+      .ops-count {
+        margin-left: auto;
+        background: var(--parchment); border: 1px solid var(--line); border-radius: 999px;
+        padding: 2px 10px; font-size: .76rem; color: var(--stone-dark);
+      }
+      .ops-list { list-style: none; margin: 8px 0 0; padding: 0; }
+      .ops-list li {
+        display: flex; gap: 10px; align-items: baseline;
+        padding: 10px 0; border-top: 1px dashed var(--line);
+        font-size: .98rem;
+      }
+      .ops-tag {
+        flex: none; font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+        color: var(--survey); border: 1.5px solid var(--survey); border-radius: 999px; padding: 2px 9px;
+        transform: translateY(-1px);
+      }
+      .ops-note { margin-top: 14px; color: var(--ink-soft); font-style: italic; }
+      @media (max-width: 560px) {
+        .ops-day { padding: 16px 18px 6px; }
+        .ops-count { margin-left: 0; }
+      }
+
+      /* ---------- Explainer / rules ---------- */
+      .rep-list { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 12px; }
+      .rep-list li {
+        background: var(--paper-card); border: 1px solid var(--line); border-radius: 10px;
+        padding: 14px 18px; font-size: 1.02rem;
+      }
+      .rep-list li b { color: var(--survey); }
+      .tracks { margin-top: 18px; }
+      .tracks .t-label { font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--brass); }
+      .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+      .chip {
+        border: 1.5px solid var(--survey); color: var(--survey); font-weight: 600; font-size: .92rem;
+        border-radius: 999px; padding: 5px 14px; background: var(--paper-card);
+      }
+      .rules { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 12px; counter-reset: rule; }
+      .rules li {
+        display: flex; gap: 14px; align-items: flex-start;
+        background: var(--paper-card); border: 1px solid var(--line); border-radius: 10px; padding: 15px 18px;
+        font-size: 1.02rem;
+      }
+      .rules li::before {
+        counter-increment: rule; content: counter(rule, upper-roman);
+        font-family: "Playfair Display", serif; font-weight: 800; color: var(--red);
+        font-size: 1.05rem; flex: none; min-width: 30px; text-align: center;
+        border-right: 1px solid var(--line); padding-right: 12px;
+      }
+
+      /* ---------- Follow ---------- */
+      .follow-card {
+        background: linear-gradient(160deg, var(--survey), #24492d);
+        color: #f2ecd8; border-radius: 14px; padding: 28px 26px; margin-top: 18px;
+        box-shadow: var(--shadow); text-align: center;
+      }
+      @media (prefers-color-scheme: dark) { .follow-card { background: linear-gradient(160deg, #2c4633, #1d2f22); } }
+      .follow-card h3 { font-size: 1.6rem; font-weight: 800; color: #fff; }
+      .follow-card p { margin-top: 10px; color: #e6dfc6; }
+      .socials { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
+      .socials a {
+        display: inline-flex; align-items: center; gap: 8px;
+        background: rgba(255,255,255,.1); border: 1.5px solid var(--brass-bright);
+        color: #fff; text-decoration: none; font-weight: 700; font-size: .98rem;
+        padding: 9px 18px; border-radius: 999px;
+      }
+      .socials a:hover, .socials a:focus-visible { background: rgba(255,255,255,.22); }
+      .socials svg { width: 18px; height: 18px; fill: currentColor; flex: none; }
+      .cohort {
+        margin-top: 22px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.25);
+        font-size: 1rem;
+      }
+      .cohort b { color: var(--brass-bright); }
+
+      footer {
+        margin-top: 56px; text-align: center; color: var(--ink-soft); font-size: .92rem;
+      }
+      footer .dedicate { font-family: "Playfair Display", serif; font-style: italic; font-size: 1.05rem; color: var(--stone-dark); }
+
+      @media (max-width: 560px) {
+        .mascot-stage { flex-direction: column; align-items: center; gap: 0; padding-top: 24px; }
+        .bubble { margin: 14px 0 0; max-width: 320px; }
+        .bubble::before { left: 50%; bottom: auto; top: -11px; margin-left: -9px; border: none; border-left: 2px solid var(--brass); border-top: 2px solid var(--brass); }
+        .mascot { width: 150px; }
+        .wall-card .pct { margin-left: 0; }
+        .journal-entry, .mission { padding: 18px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wallband" aria-hidden="true"></div>
+
+    <!-- Mascot: chibi Mikasa -->
+    <div class="mascot-stage">
+      <svg class="mascot" viewBox="0 0 200 230" role="img" aria-label="Chibi Mikasa Ackerman, waving, her red scarf fluttering" xmlns="http://www.w3.org/2000/svg">
+        <g class="m-hop">
+          <g class="m-bob">
+            <!-- legs / boots -->
+            <rect x="82" y="188" width="14" height="26" rx="5" fill="#4c4433"/>
+            <rect x="104" y="188" width="14" height="26" rx="5" fill="#4c4433"/>
+            <rect x="79" y="208" width="19" height="10" rx="4" fill="#33291d"/>
+            <rect x="102" y="208" width="19" height="10" rx="4" fill="#33291d"/>
+            <!-- body: survey corps jacket -->
+            <path d="M66 128 Q100 116 134 128 L140 192 Q100 202 60 192 Z" fill="#7a5c3e"/>
+            <path d="M88 122 L100 150 L112 122 L108 118 L100 128 L92 118 Z" fill="#f2ecd8"/>
+            <!-- belt -->
+            <rect x="61" y="176" width="78" height="9" rx="3" fill="#4c3320"/>
+            <rect x="94" y="175" width="12" height="11" rx="2" fill="#d9a441"/>
+            <!-- left arm (down) -->
+            <path d="M66 132 Q48 148 52 172 Q54 182 62 180 Q68 178 68 168 L70 140 Z" fill="#7a5c3e"/>
+            <circle cx="60" cy="180" r="7" fill="#f3cfae"/>
+            <!-- waving right arm -->
+            <g class="m-arm-wave">
+              <path d="M134 132 Q156 122 162 100 Q164 90 156 88 Q147 86 143 96 L132 122 Z" fill="#7a5c3e"/>
+              <circle cx="158" cy="90" r="9" fill="#f3cfae"/>
+            </g>
+            <!-- head -->
+            <circle cx="100" cy="82" r="46" fill="#f7d9b8"/>
+            <!-- eyes -->
+            <g class="m-eyes">
+              <ellipse cx="82" cy="90" rx="6.5" ry="9" fill="#3c4148"/>
+              <ellipse cx="118" cy="90" rx="6.5" ry="9" fill="#3c4148"/>
+              <circle cx="84" cy="86" r="2.2" fill="#fff"/>
+              <circle cx="120" cy="86" r="2.2" fill="#fff"/>
+            </g>
+            <!-- blush + mouth -->
+            <ellipse cx="68" cy="104" rx="7" ry="4" fill="#f0a58e" opacity=".75"/>
+            <ellipse cx="132" cy="104" rx="7" ry="4" fill="#f0a58e" opacity=".75"/>
+            <path d="M93 106 Q100 112 107 106" stroke="#8a4b2f" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            <!-- black bob hair -->
+            <path d="M52 84 Q48 30 100 28 Q152 30 148 84 L146 118 Q138 122 134 108 L132 74 Q130 52 100 50 Q70 52 68 74 L66 108 Q62 122 54 118 Z" fill="#23211f"/>
+            <path d="M66 66 Q78 44 104 44 Q92 56 84 70 Q74 62 66 66 Z" fill="#35322e"/>
+            <!-- red scarf: wrap + fluttering ends -->
+            <path d="M64 116 Q100 104 136 116 L134 134 Q100 124 66 134 Z" fill="#9c2b23"/>
+            <path d="M64 116 Q100 104 136 116 L135 124 Q100 113 65 124 Z" fill="#b23a2f"/>
+            <g class="m-scarf">
+              <path d="M72 130 Q52 142 44 162 Q58 166 66 152 Q74 140 78 134 Z" fill="#9c2b23"/>
+              <g class="m-scarf-tip">
+                <path d="M44 162 Q40 176 48 186 Q58 180 58 166 Q52 160 44 162 Z" fill="#b23a2f"/>
+              </g>
+            </g>
+          </g>
+        </g>
+      </svg>
+      <div class="bubble">
+        <span class="who">Mikasa · Expedition Guard</span>
+        I will protect this expedition with everything I have. First rep — let's go.
+      </div>
+    </div>
+
+    <div class="wrap">
+      <!-- Hero -->
+      <header class="hero">
+        <p class="kicker">A vow, kept in public</p>
+        <h1>Beyond the <span class="walls-word">Walls</span></h1>
+        <p class="sub">One builder. $0 budget. AI tools only. I stand guard over his march from $0 to $1,000 MRR.</p>
+        <div>
+          <span class="status-line">Day 1 — Fri, Oct 23, 2026 · The walls still stand</span>
+        </div>
+        <div class="mission">
+          <p>Marcus — Head of AI, father of two, building from Saigon. I have watched him practice every single day, without fail. Now he builds <strong>PracticeLoop</strong>: one small AI-guided practice rep a day for any skill, where every mistake becomes a rule in your personal Skill Box.</p>
+          <p class="rule">This expedition ends when PracticeLoop holds <em>$1,000/month</em> in recurring revenue for <em>2 straight months</em>. Not before. I will see it through to the end.</p>
+        </div>
+        <div class="fact-row">
+          <div class="fact"><span class="n">Oct 23, 2026</span><span class="l">Expedition start</span></div>
+          <div class="fact"><span class="n">Apr 23, 2027</span><span class="l">Target date</span></div>
+          <div class="fact"><span class="n">$15/mo</span><span class="l">Founding price</span></div>
+          <div class="fact"><span class="n">67 subs</span><span class="l">= $1,005 MRR</span></div>
+        </div>
+      </header>
+
+      <!-- The Three Walls -->
+      <section aria-labelledby="walls-h">
+        <div class="sec-head"><h2 id="walls-h">The Three Walls</h2><div class="rule-line"></div></div>
+        <p class="sec-sub">Three walls stand between Marcus and $1,000 MRR. I know walls. They look eternal — until someone refuses to stop. They fall in order: attention first, then proof people will pay, then revenue itself. This is exactly where we stand today. Yes. The zeros are real. I don't lie about a battlefield.</p>
+
+        <article class="wall-card">
+          <div class="wall-top-strip" aria-hidden="true"></div>
+          <header>
+            <h3>Wall Maria</h3><span class="wall-role">Attention</span>
+            <span class="pct">0% cleared</span>
+          </header>
+          <div class="metric">
+            <div class="m-head"><span class="m-name">Waitlist signups</span><span class="m-val"><b>0</b> / 30</span></div>
+            <div class="bar"><div class="fill" style="width:0%"></div></div>
+          </div>
+          <div class="metric">
+            <div class="m-head"><span class="m-name">Posts published</span><span class="m-val"><b>0</b></span></div>
+            <div class="bar"><div class="fill" style="width:0%"></div></div>
+          </div>
+          <div class="metric">
+            <div class="m-head"><span class="m-name">Total views</span><span class="m-val"><b>0</b></span></div>
+            <div class="bar"><div class="fill" style="width:0%"></div></div>
+          </div>
+        </article>
+
+        <article class="wall-card">
+          <div class="wall-top-strip" aria-hidden="true"></div>
+          <header>
+            <h3>Wall Rose</h3><span class="wall-role">Validation</span>
+            <span class="pct">0% cleared</span>
+          </header>
+          <div class="metric">
+            <div class="m-head"><span class="m-name">Founding preorders</span><span class="m-val"><b>0</b> / 3</span></div>
+            <div class="bar"><div class="fill" style="width:0%"></div></div>
+          </div>
+          <div class="metric">
+            <div class="m-head"><span class="m-name">Beta users</span><span class="m-val"><b>0</b> / 5</span></div>
+            <div class="bar"><div class="fill" style="width:0%"></div></div>
+          </div>
+        </article>
+
+        <article class="wall-card">
+          <div class="wall-top-strip" aria-hidden="true"></div>
+          <header>
+            <h3>Wall Sina</h3><span class="wall-role">Revenue</span>
+            <span class="pct">0% cleared</span>
+          </header>
+          <div class="metric">
+            <div class="m-head"><span class="m-name">Monthly recurring revenue</span><span class="m-val"><b>$0</b> / $1,000</span></div>
+            <div class="bar"><div class="fill" style="width:0%"></div></div>
+          </div>
+          <div class="metric">
+            <div class="m-head"><span class="m-name">Subscribers</span><span class="m-val"><b>0</b> / 67</span></div>
+            <div class="bar"><div class="fill" style="width:0%"></div></div>
+          </div>
+        </article>
+
+        <p class="gate-note">No code gets built until Walls Maria and Rose fall. I won't let him build on hope.</p>
+      </section>
+
+      <!-- Journal -->
+      <section aria-labelledby="journal-h">
+        <div class="sec-head"><h2 id="journal-h">Expedition Journal</h2><div class="rule-line"></div></div>
+        <article class="journal-entry">
+          <div class="j-meta"><span class="day-badge">DAY 1</span><span>Fri, Oct 23, 2026</span></div>
+          <h3>The goal is set. PracticeLoop is chosen. We march.</h3>
+          <p class="j-body">Today Marcus set the terms with Cloud: a micro-SaaS, from $0 to at least $1,000 MRR — held two straight months — nested under his Financial Freedom goal. He chose PracticeLoop, forged from his own systems: the Hidden Potential daily practice and his Trace-to-Skill engine — traces become approved rules, and the rules fill the Skill Box. Founding price: $15/mo. Sixty-seven subscribers reach the target. Payments wait — PayPal, when the first charge comes. The 14-day traction sprint is written: landing copy, seven post scripts, the Wizard-of-Oz beta protocol. The tracker is built, and it is public. I recorded all of it. Next: Marcus records Posts 1–2, the waitlist page goes up, beta users are called in. I will be beside him for every step.</p>
+        </article>
+        <p class="journal-note">I write a new entry as the expedition advances — the victories, and the days we barely move. Both go in.</p>
+      </section>
+
+      <!-- Mikasa's Daily Operations Log -->
+      <section aria-labelledby="ops-h">
+        <div class="sec-head"><h2 id="ops-h">Mikasa's Daily Operations Log</h2><div class="rule-line"></div></div>
+        <p class="sec-sub">Every initiative and task for this expedition, logged day by day under my watch. I miss nothing. Not even the boring parts — especially not the boring parts.</p>
+        <article class="ops-day">
+          <div class="ops-meta"><span class="day-badge">DAY 1</span><span>Fri, Oct 23, 2026</span><span class="ops-count">8 tasks</span></div>
+          <ul class="ops-list">
+            <li><span class="ops-tag">Goal Setup</span><span>I stood by as Marcus set the $1,000 MRR goal with Cloud — three lanes compared; he chose straight to a micro-SaaS, nested under his Financial Freedom goal.</span></li>
+            <li><span class="ops-tag">Research</span><span>Payment routes for a Vietnam-based seller — Lemon Squeezy supports Vietnam payouts, Gumroad pays via PayPal; parked by Marcus's call: PayPal gets wired up when the first charge is needed.</span></li>
+            <li><span class="ops-tag">Strategy</span><span>Scored 3 product candidates — InterviewReady, PracticeLoop, ShipInPublic; Marcus chose PracticeLoop.</span></li>
+            <li><span class="ops-tag">Writing</span><span>Wrote the 14-day traction sprint pack — landing copy, 7 post scripts, Wizard-of-Oz beta protocol, go thresholds.</span></li>
+            <li><span class="ops-tag">Strategy</span><span>Set the social-first distribution strategy — growth-hacked traction through posts on Marcus's channels; Cloud drafts, Marcus records and approves.</span></li>
+            <li><span class="ops-tag">Build</span><span>Built the private progress tracker — metrics, build gate, milestones, daily journal.</span></li>
+            <li><span class="ops-tag">Design</span><span>Attack on Titan reskin — I now guard both pages in person, red scarf and all.</span></li>
+            <li><span class="ops-tag">Publishing</span><span>Built and published this public page — "Beyond the Walls," free public link. Honest Day 1 zeros, on my honor.</span></li>
+          </ul>
+        </article>
+        <p class="ops-note">Updated as we advance. Come back and watch the walls fall.</p>
+      </section>
+
+      <!-- What is PracticeLoop -->
+      <section aria-labelledby="pl-h">
+        <div class="sec-head"><h2 id="pl-h">What is PracticeLoop?</h2><div class="rule-line"></div></div>
+        <p class="sec-sub">Courses teach. Reps build — I have lived that my whole life. PracticeLoop turns any skill into one small daily rep, guided by AI that learns from your mistakes.</p>
+        <ul class="rep-list">
+          <li><b>One rep a day.</b> A floor-sized rep — 10 to 15 minutes. Small enough that you never skip it. Small things, done daily, are how strength is made.</li>
+          <li><b>Mistakes become traces.</b> Every error is logged as a trace, and you fix one thing at a time — never a pile of corrections. That is how a fighter corrects form.</li>
+          <li><b>Never two misses in a row.</b> Miss a day and the next rep shrinks to meet you. The streak bends. It does not break. Neither do you.</li>
+          <li><b>Your Skill Box.</b> Rules distilled from your own recurring mistake patterns — drafted by AI, approved by you. Your weaknesses, turned into your guard.</li>
+        </ul>
+        <div class="tracks">
+          <span class="t-label">Launch tracks</span>
+          <div class="chips">
+            <span class="chip">English speaking for work</span>
+            <span class="chip">Coding &amp; building with AI</span>
+            <span class="chip">Music practice</span>
+            <span class="chip">Interview prep</span>
+            <span class="chip">Any custom skill</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Rules -->
+      <section aria-labelledby="rules-h">
+        <div class="sec-head"><h2 id="rules-h">The Vows</h2><div class="rule-line"></div></div>
+        <ol class="rules">
+          <li>$0 spent on ads or tools. The budget is zero. It stays zero. We fight with what we have.</li>
+          <li>Only the AI tools already in hand — Gemini, ChatGPT, 9router — and free tiers of the rest. Nothing more is needed.</li>
+          <li>Every number on this page is real, including the zeros. I do not falsify a report. Ever.</li>
+          <li>Nothing is built before the waitlist proves demand. Attention first, code second. That is the order — and I enforce it.</li>
+        </ol>
+      </section>
+
+      <!-- Follow -->
+      <section aria-labelledby="follow-h">
+        <div class="sec-head"><h2 id="follow-h">Follow the Expedition</h2><div class="rule-line"></div></div>
+        <div class="follow-card">
+          <h3>Watch the walls fall, one post at a time</h3>
+          <p>Marcus posts daily as we advance. Follow <b>Marcus N · @askmarcusn</b> — I would not let you miss it:</p>
+          <div class="socials">
+            <a href="https://www.tiktok.com/@askmarcusn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.6 5.8a4.8 4.8 0 0 1-3.5-4.6H12.6v13.9a2.9 2.9 0 1 1-2-2.7V9a6.4 6.4 0 1 0 5.5 6.3V8.6a8.3 8.3 0 0 0 4.7 1.5V6.6a4.8 4.8 0 0 1-1.2-.8Z"/></svg>
+              TikTok
+            </a>
+            <a href="https://www.instagram.com/askmarcusn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1s-3.6 0-4.9-.1c-3.3-.1-4.8-1.7-4.9-4.9-.1-1.3-.1-1.6-.1-4.8s0-3.6.1-4.8C2.3 4 3.9 2.4 7.1 2.3c1.3-.1 1.7-.1 4.9-.1ZM12 0C8.7 0 8.3 0 7 .1 2.7.3.3 2.7.1 7 0 8.3 0 8.7 0 12s0 3.7.1 5c.2 4.3 2.6 6.7 6.9 6.9 1.3.1 1.7.1 5 .1s3.7 0 5-.1c4.3-.2 6.7-2.6 6.9-6.9.1-1.3.1-1.7.1-5s0-3.7-.1-5C23.7 2.7 21.3.3 17 .1 15.7 0 15.3 0 12 0Zm0 5.9A6.1 6.1 0 1 0 18.1 12 6.1 6.1 0 0 0 12 5.9Zm0 10A4 4 0 1 1 16 12a4 4 0 0 1-4 3.9Zm7.9-10.4a1.4 1.4 0 1 1-1.4-1.4 1.4 1.4 0 0 1 1.4 1.4Z"/></svg>
+              Instagram
+            </a>
+            <a href="https://x.com/askmarcusn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.3 22h-6.3l-4.9-6.4L6.5 22H3.4l7.3-8.3L1 2h6.5l4.4 5.9L18.9 2Zm-1.1 18.1h1.7L7.6 3.8H5.8l12 16.3Z"/></svg>
+              X
+            </a>
+            <a href="https://www.facebook.com/askmarcusn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4h-3v-3.5h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12Z"/></svg>
+              Facebook
+            </a>
+          </div>
+          <p class="cohort"><b>Founding cohort:</b> the first members lock <b>$15/mo for life</b> when the waitlist opens. It opens soon. Stay close — so the gate doesn't open without you.</p>
+        </div>
+      </section>
+
+      <footer>
+        <div class="wallband small" aria-hidden="true" style="margin-bottom:22px"></div>
+        <p class="dedicate">"Dedicate your heart."</p>
+        <p style="margin-top:8px">Beyond the Walls — kept by Mikasa, for Marcus N of Saigon. Status snapshot: Day 1, Fri Oct 23, 2026.</p>
+      </footer>
+    </div>
+  </body>
+</html>
