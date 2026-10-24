@@ -325,9 +325,16 @@
         .wall-card .pct { margin-left: 0; }
         .journal-entry, .mission { padding: 18px; }
       }
+      .site-header{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 20px;background:var(--paper-card);border-bottom:1px solid var(--line);font-family:"IBM Plex Mono",monospace}
+      .site-brand{font-family:"Playfair Display",serif;font-size:1.15rem;font-weight:800;color:var(--ink);text-decoration:none}
+      .site-nav{display:flex;gap:18px}
+      .site-nav a{color:var(--ink-soft);text-decoration:none;font-size:.85rem;font-weight:600}
+      .site-nav a[aria-current="page"]{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+      @media(max-width:560px){.site-header{padding:10px 14px}.site-nav{gap:12px}.site-nav a{font-size:.8rem}}
     </style>
   </head>
   <body>
+    <header class="site-header"><a class="site-brand" href="/">Beyond the Walls</a><nav class="site-nav" aria-label="Site"><a href="/" aria-current="page">Expedition</a><a href="/brand">Marcus N · Consulting</a></nav></header>
     <div class="wallband" aria-hidden="true"></div>
 
     <!-- Mascot: chibi Mikasa -->

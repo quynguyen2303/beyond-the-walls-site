@@ -29,13 +29,19 @@ h2.sec{font-family:"Playfair Display",serif;font-size:1.7rem;margin:36px 0 4px}
 a{color:var(--green)}
 .btn{display:inline-block;background:var(--green);color:#fff !important;text-decoration:none;padding:12px 20px;border-radius:999px;font-weight:700;margin-top:10px}
 .btn2{display:inline-block;border:1px solid var(--green);color:var(--green);text-decoration:none;padding:11px 18px;border-radius:999px;font-weight:700;margin:10px 0 0 8px}
+.site-header{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 20px;background:var(--paper);border-bottom:1px solid var(--line);font-family:"IBM Plex Mono",monospace}
+.site-brand{font-family:"Playfair Display",serif;font-size:1.15rem;font-weight:800;color:var(--ink);text-decoration:none}
+.site-nav{display:flex;gap:18px}
+.site-nav a{color:var(--soft);text-decoration:none;font-size:.85rem;font-weight:600}
+.site-nav a[aria-current="page"]{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+@media(max-width:560px){.site-header{padding:10px 14px}.site-nav{gap:12px}.site-nav a{font-size:.8rem}}
 .small{font-size:.9rem;color:var(--stone)}
 footer{margin-top:40px;color:var(--stone);font-size:.9rem}
 </style>
 </head>
 <body>
+<header class="site-header"><a class="site-brand" href="/">Beyond the Walls</a><nav class="site-nav" aria-label="Site"><a href="/">Expedition</a><a href="/brand" aria-current="page">Marcus N · Consulting</a></nav></header>
 <div class="wrap">
-<nav><a href="/">← Beyond the Walls expedition</a><a href="#contact">Work with me →</a></nav>
 
 <header>
 <h1>Marcus N</h1>
