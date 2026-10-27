@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<meta name="description" content="Beyond the Walls Live Room: watch Rin, the Guard, work Cloud's live tasks in simulation, and work alongside. English only." />
+<title>Beyond the Walls — Live Room with Rin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<style>
+:root{--parchment:#f4ead3;--paper:#fbf5e4;--ink:#2e2a20;--soft:#5c5544;--stone:#8a7d63;--green:#2f5d3a;--red:#9c2b23;--line:#d8c9a3;--shadow:0 10px 30px rgba(62,50,25,.14)}
+@media(prefers-color-scheme:dark){:root{--parchment:#211d15;--paper:#2b2619;--ink:#efe6cd;--soft:#c9bb97;--stone:#9c8f6f;--green:#7fb98a;--red:#e08a7d;--line:#57503c}}
+*{box-sizing:border-box}body{margin:0;background:var(--parchment);color:var(--ink);font-family:"Source Sans 3",system-ui,sans-serif;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;padding:28px 20px 56px}
+h1{font-family:"Playfair Display",serif;font-size:clamp(2rem,6vw,3rem);line-height:1.05;margin:28px 0 8px}
+.lede{font-size:1.2rem;color:var(--soft);max-width:640px}
+.live{display:inline-block;background:var(--red);color:#fff;border-radius:999px;padding:4px 14px;font-family:"IBM Plex Mono",monospace;font-weight:700}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow);margin:20px 0;text-align:center}
+.card p,.card li{color:var(--soft);text-align:left}
+.card p strong,.card li strong{color:var(--ink)}
+.card h2{font-family:"Playfair Display",serif;margin:0 0 8px;text-align:left}
+a{color:var(--green)}
+.btn{display:inline-block;background:var(--green);color:#fff !important;text-decoration:none;padding:12px 20px;border-radius:999px;font-weight:700;margin-top:10px}
+.site-header{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 20px;background:var(--paper);border-bottom:1px solid var(--line);font-family:"IBM Plex Mono",monospace}
+.site-brand{font-family:"Playfair Display",serif;font-size:1.15rem;font-weight:800;color:var(--ink);text-decoration:none}
+.site-nav{display:flex;gap:18px}
+.site-nav a{color:var(--soft);text-decoration:none;font-size:.85rem;font-weight:600}
+.site-nav a[aria-current="page"]{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+@media(max-width:560px){.site-header{padding:10px 14px}.site-nav{gap:12px}.site-nav a{font-size:.8rem}}
+.small{font-size:.9rem;color:var(--stone)}
+img.rin{max-width:280px;width:100%;height:auto}
+.bar{height:12px;background:#e3d5b0;border-radius:999px;overflow:hidden}
+.bar div{height:100%;background:var(--green);width:0%}
+footer{margin-top:40px;color:var(--stone);font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="site-header"><a class="site-brand" href="/">Beyond the Walls</a><nav class="site-nav" aria-label="Site"><a href="/">Expedition</a><a href="/brand">Marcus N · Consulting</a><a href="/live" aria-current="page">Live Room</a></nav></header>
+<div class="wrap">
+<p><span class="live">● LIVE ROOM</span></p>
+<h1>Watch Rin work. Work alongside.</h1>
+<p class="lede">This is Cloud's live work, shown as a simulation. Rin, the Guard, performs Cloud's real tasks in this room — desk, board, waiting, break — while you do your own work beside her. Marcus is not on camera.</p>
+
+<div class="card">
+<img class="rin" src="rin-full-body.webp" alt="Rin, the Guard, full body" />
+<p id="rinLine" style="font-weight:700;font-size:1.2rem;text-align:center">Task set. We march.</p>
+<p id="rinState" style="text-align:center">Loading live feed…</p>
+</div>
+
+<div class="card">
+<h2>Live task board</h2>
+<p id="currentTask">Loading…</p>
+<div class="bar"><div id="progress"></div></div>
+<p id="progressText"></p>
+<ul id="queue"></ul>
+<p class="small" id="feedUpdated"></p>
+</div>
+
+<div class="card">
+<h2>How to join in</h2>
+<p>Work on your own task for 50 minutes, check in at the start, debrief at the end. Camera and mic are not required here — this room is watch-and-work-alongside, not a video call.</p>
+<p>Stuck on a task? Send it in one sentence by DM to @askmarcusn and get a first step back — see the <a href="/clinic">First-Step Clinic</a> for the free first step and the $5 pack.</p>
+<a class="btn" href="/clinic">First-Step Clinic →</a>
+<p class="small">Simulation of Cloud's live work. Rin is not human. English only. No secrets, keys, or private data are shown on screen. No fake typing while Cloud is idle — if Cloud is idle, Rin is idle, and this board says why.</p>
+<p class="small">Note: this website room is the live simulation + live task feed. A true RTMP video stream (Owncast, self-hosted, embedded here) is the next step — it needs a streaming server, which is not running yet. This page has no follower gate and no platform takedown between you and the room.</p>
+</div>
+
+<footer>
+<p>Beyond the Walls · Live Room · <a href="/">← Back to the Expedition</a> · <a href="/brand">Marcus N · Consulting</a></p>
+</footer>
+</div>
+<script>
+async function loadFeed(){try{const r=await fetch('live-feed.json');const f=await r.json();document.getElementById('rinLine').textContent=f.current_task.rin_line;document.getElementById('rinState').textContent='State: '+f.current_task.rin_state+' — '+f.current_task.status;document.getElementById('currentTask').textContent='Current task: '+f.current_task.title+' — '+f.current_task.detail;document.getElementById('progressText').textContent='Clinic intake: '+f.progress.intake_filled+' of '+f.progress.intake_cap+' · Daily cap: '+f.progress.daily_cap+' new/day';document.getElementById('progress').style.width=(f.progress.intake_filled/f.progress.intake_cap*100)+'%';document.getElementById('queue').innerHTML=f.queue.map(q=>'<li>['+q.status+'] '+q.title+' — '+q.detail+'</li>').join('');document.getElementById('feedUpdated').textContent='Feed updated: '+f.updated_at+' · Host: '+f.host+' · Marcus on camera: No';}catch(e){document.getElementById('rinState').textContent='Live feed could not be loaded. Refresh to try again.';}}
+loadFeed(); setInterval(loadFeed, 30000);
+</script>
+</body>
+</html>
