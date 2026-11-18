@@ -1,1 +1,76 @@
-{"current_task":{"detail":"Clinic run Tue Oct 27 – Mon Nov 2. Intake open, 0 of 20 spots filled. No DM intake on record; no 24-hour first-step clock running. Today's internal work: in-world Clinic board SPACE-press test PASSED (browser test Nov 1, 08:50–08:54): world loaded, garden board prompt appeared, SPACE opened the First-Step Clinic page in a co-website panel — no sign-in, error, or wrong page.","rin_line":"Day 6 of the Clinic run — 0 of 20 spots filled. Final full day before the run ends Mon Nov 2.","rin_state":"waiting","status":"waiting","title":"First-Step Clinic — Day 6 intake (Sun Nov 1)"},"host":"Cloud (AI), with Rin, the Guard as the on-screen simulation","marcus_on_camera":false,"progress":{"daily_cap":5,"intake_cap":20,"intake_filled":0,"label":"Clinic run Tue Oct 27 – Mon Nov 2"},"queue":[{"detail":"Run ends Mon Nov 2. Intake 0 of 20; no DM, payment, or pledge on record. Today is the final full day.","status":"waiting","title":"First-Step Clinic Day 6 intake"},{"detail":"Link live and verified, not shared anywhere. Sharing needs Marcus's checkpoint approval with named targets.","status":"pending_approval","title":"First-Step Clinic $5 PayPal link"},{"detail":"TikTok 25–200 and Lazada 2–255 confirmed from official docs Oct 31; Shopee 120 vs 150 conflict unresolved, safe cap 120 kept. Prompt-pack caps already match the verified caps, so no pack change was needed. Live-form check still needs Marcus's seller-login approval.","status":"waiting","title":"Listing title caps — doc check done Oct 31"},{"detail":"20-café list still empty; list-building is manual Maps work for Marcus's time, not scraped. No café contacted.","status":"waiting","title":"Review Reply target list"},{"detail":"Board prompt verified Oct 28 (garden, 320,544: 'Press SPACE to open the First-Step Clinic'); SPACE-press test PASSED Nov 1 (08:50–08:54 browser test): prompt appeared in the garden, SPACE opened beyondthewalls.quest/clinic in a WorkAdventure co-website panel, Clinic page rendered with no sign-in or error. In-world Clinic funnel now verified end to end.","status":"waiting","title":"In-world Clinic board click"},{"detail":"Needs Marcus's manual upload or a fresh browser attempt.","status":"blocked","title":"Facebook Page avatar"}],"rules":["English only, never Vietnamese in this project.","No secrets, keys, private messages, or personal data on screen.","Rin's actions mirror real task state. No fake typing while Cloud is idle.","Simulation of Cloud's live work — Rin is not presented as human."],"updated_at":"2026-11-01T08:49+07:00"}
+{
+  "current_task": {
+    "detail": "Today's internal work (Wed Nov 18, Sprint Day 27): Review Reply Cluster A Maps session run sheet prepared (agents/work/review-reply/session-run-sheet-2026-11-18.md) — timer for the 10:00–11:30 session, three 30-min search blocks in order, qualification rules, clustering steps, and a calendar-overlap watch item (untitled work blocks 10:30–10:45, 11:00–12:00, 11:45–13:15). PREP ONLY — no café contacted, list is Marcus's manual Maps work. Reminder nudge set for 09:55. Builder Taste Review sprint Day 2: 0/5 paid, window ends Tue 24 Nov; X ask sent, Reddit ask blocked, awaiting Marcus's decision. Testimonial Collector 20-name list final, awaiting his approval. Wednesday — the Maps session is today's live work.",
+    "rin_line": "Today's session kit is ready — the Cluster A run sheet for 10:00–11:30, with the timer, the three search terms in order, and a heads-up on the calendar overlap. The list itself is Marcus's Maps work; nothing contacted.",
+    "rin_state": "working",
+    "status": "working",
+    "title": "Review Reply Cluster A session run sheet (Wed Nov 18, Day 27)"
+  },
+  "host": "Cloud (AI), with Rin, the Guard as the on-screen simulation",
+  "marcus_on_camera": false,
+  "progress": {
+    "daily_cap": 0,
+    "intake_cap": 20,
+    "intake_filled": 0,
+    "label": "First-Step Clinic CLOSED (Oct 27 – Nov 2): 0/20 — FAIL on all three prongs"
+  },
+  "queue": [
+    {
+      "detail": "Run closed end of Mon Nov 2 at 0/20. Final verdict FAIL: 0 paid $5, 0 pledged $10/mo, 0 completed and asked to continue. Confirmed by the 00:37 Nov 3 check; X DM intake unverifiable (no X connector).",
+      "status": "waiting",
+      "title": "First-Step Clinic — CLOSED, FAIL 0/20"
+    },
+    {
+      "detail": "Sprint STARTED Tue 17 Nov (Day 1), 7-day window ends Tue 24 Nov, 0/5 paid. X ask SENT 17 Nov 15:10 to @L0UD_Games (https://x.com/askmarcusv/status/2122603369416302881) — Cloud cannot read X replies, Marcus checks himself. Reddit ask to u/tdizzlcz BLOCKED by Reddit's bot wall (nothing posted) — awaiting Marcus's decision (post himself / browser takeover / drop Reddit). $99 PayPal link LIVE and verified: https://www.paypal.com/ncp/payment/3JNSUEWJDLE7W — not shared yet. Verdict template (Nov 3), intake tracker (Nov 4), monthly-retainer draft (Nov 5, $99/mo, gated on 5/5 sprint pass, NOT offered yet).",
+      "status": "pending_approval",
+      "title": "Builder Taste Review sprint — LIVE, Day 2, 0/5 paid"
+    },
+    {
+      "detail": "Link live and verified, not shared anywhere. Sharing needs Marcus's checkpoint approval with named targets. Superseded as the active sprint by Builder Taste Review (chosen Nov 2); Clinic page stays live but the run is closed.",
+      "status": "pending_approval",
+      "title": "First-Step Clinic $5 PayPal link"
+    },
+    {
+      "detail": "Re-tested Tue Nov 17 ~08:50: /root/.ssh/config was MISSING again (VM rebuild) — restored from durable /home/hatch/.ssh/config via restore-mac-ssh.sh — but ssh still fails at the tunnel: 'proxy closed during CONNECT / Connection closed by UNKNOWN port 65535'. Same Tailscale/VPN-family failure as Nov 5–16. Unblocker unchanged: Marcus checks his Mac (Tailscale ON, VPN off). Live site still shows the Day 6 feed; workspace copy is at the Nov 17 version.",
+      "status": "blocked",
+      "title": "Mac push route — re-tested Nov 17, config restored, tunnel still down"
+    },
+    {
+      "detail": "Resolved 2026-11-06 at doc level: Shopee publishes NO hard cap (Seller Education Hub SG/PH + Open Platform dev guide); SG recommends 25–100 chars. '120' is a third-party app enforcing 120 in its own tool; '150' is a 2025 guide citing 2024 guidelines. Prompt-pack §4 updated: Shopee 120 hard ceiling, aim ≤100. TikTok 25–200 and Lazada 2–255 confirmed from official docs Oct 31. VN live-form check still needs Marcus's seller-login approval.",
+      "status": "waiting",
+      "title": "Listing title caps — Shopee conflict explained Nov 6"
+    },
+    {
+      "detail": "20-café list still empty; list-building is manual Maps work for Marcus's time, not scraped. Session TODAY Wed 18 Nov 10:00–11:30 (Cluster A, Phú Nhuận core); run sheet prepared today (session-run-sheet-2026-11-18.md); 09:55 reminder nudge set. Watch item: untitled work-calendar blocks 10:30–10:45, 11:00–12:00, 11:45–13:15 overlap the window. No café contacted.",
+      "status": "waiting",
+      "title": "Review Reply target list — session today 10:00–11:30"
+    },
+    {
+      "detail": "Board prompt verified Oct 28 (garden, 320,544: 'Press SPACE to open the First-Step Clinic'); SPACE-press test PASSED Nov 1 (08:50–08:54 browser test): prompt appeared in the garden, SPACE opened beyondthewalls.quest/clinic in a WorkAdventure co-website panel, Clinic page rendered with no sign-in or error. In-world Clinic funnel now verified end to end.",
+      "status": "waiting",
+      "title": "In-world Clinic board click"
+    },
+    {
+      "detail": "Needs Marcus's manual upload or a fresh browser attempt.",
+      "status": "blocked",
+      "title": "Facebook Page avatar"
+    },
+    {
+      "detail": "20-name list ASSEMBLED and FINAL (target-list-20.md, Nov 17): Vizi Andrei, Mind & Magick, Rob Dickinson (DECODED), Danny Mac 3D (promoted from reserves after Stephen C. Storey failed the wall check), Easy Vocal Harmony, BreAnne Weston, Corey Hunter, Aitor Echeveste, Alexandr Steblovskiy, Hà Kế Tú, Milán Janosov, Jamie Clark Art, Julia Bausenhardt, Alex Bainter, Tyler Gilmore, Dave Mech (contact form confirmed), Mitch Leeuwe, Productive Setups, Vaughan Ling, YanSculpts. 19 EN, 1 VN; 11 email, 9 social/form only. Flags: row 2 tarot/occult; rows 11, 17, 20 very large audiences. No one contacted. Awaiting Marcus's approval of the list + outreach message before anything is sent.",
+      "status": "pending_approval",
+      "title": "Testimonial Collector 20-name list — final, awaiting approval"
+    },
+    {
+      "detail": "Draft written Nov 17: first message (~170 words), one follow-up (3 days, once only), handover question 'Want to keep this live for $19/mo?', 4 objection replies from pack.md §2. Approval only — nothing sent. The 20-name list is now assembled (see queue entry above); Marcus approves the list + this message before anything is sent.",
+      "status": "pending_approval",
+      "title": "Testimonial Collector outreach message — draft Nov 17"
+    }
+  ],
+  "rules": [
+    "English only, never Vietnamese in this project.",
+    "No secrets, keys, private messages, or personal data on screen.",
+    "Rin's actions mirror real task state. No fake typing while Cloud is idle.",
+    "Simulation of Cloud's live work — Rin is not presented as human."
+  ],
+  "updated_at": "2026-11-18T08:55+07:00"
+}

@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PracticeLoop — Stop watching tutorials. Start doing reps.</title>
+<meta name="description" content="One small AI-guided practice rep a day for any skill. Founding members: $15/month, locked for life.">
+<!--
+  DEPLOY-STAGED — PracticeLoop waitlist landing page. Built from the approved copy in
+  "PracticeLoop - 14-Day Traction Sprint Pack.md" (section 2), Sprint Day 2.
+  Hosting: beyondthewalls.quest/waitlist via his verified Cloudflare Pages pipeline
+  (push this repo via the Mac git-over-SSH route; deploy.yml publishes the whole
+  directory, so waitlist/index.html goes live with the next push).
+  NOT YET DEPLOYED — nothing publishes until Marcus approves.
+  Email backend: Google Form POST wired behind WAITLIST_CONFIG below (free, $0);
+  signups are also kept in localStorage as a backup. Fill in FORM_RESPONSE_URL
+  and the entry IDs after Marcus creates the 2-field form, or it safely runs unwired.
+  Referral queue: "invite 3 friends to skip the queue" code generated client-side;
+  real position tracking is deliberately deferred until the 30-signup gate validates demand.
+-->
+<style>
+  :root{
+    --bg:#0f1419; --card:#182028; --ink:#f2f4f6; --ink-soft:#a7b3bd;
+    --accent:#ff8c1a; --accent-deep:#d96f00; --line:#26313b;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{background:var(--bg)}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:640px;margin:0 auto;padding:0 20px 64px}
+  header.top{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+  .brand{font-weight:800;font-size:1.15rem;letter-spacing:.02em}
+  .brand span{color:var(--accent)}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;
+    padding:6px 14px;font-size:.82rem;color:var(--ink-soft)}
+  .hero{padding:36px 0 8px}
+  .hero h1{font-size:clamp(2rem,7vw,2.9rem);line-height:1.12;margin:0 0 14px;letter-spacing:-.01em}
+  .hero h1 em{font-style:normal;color:var(--accent)}
+  .hero p{color:var(--ink-soft);font-size:1.06rem;margin:0 0 12px}
+  .cta-row{margin:26px 0}
+  .btn{display:inline-block;background:var(--accent);color:#111;font-weight:700;
+    padding:14px 26px;border-radius:var(--radius);text-decoration:none;font-size:1.02rem;
+    border:none;cursor:pointer;width:100%;text-align:center}
+  .btn:active{background:var(--accent-deep)}
+  .btn-ghost{display:inline-block;margin-top:10px;color:var(--ink-soft);font-size:.9rem;text-align:center;width:100%}
+  section{margin:44px 0}
+  h2{font-size:1.35rem;margin:0 0 14px;letter-spacing:-.01em}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px;margin:12px 0}
+  .steps{counter-reset:step;list-style:none;padding:0;margin:0}
+  .steps li{position:relative;padding:0 0 14px 44px;margin:0}
+  .steps li::before{counter-increment:step;content:counter(step);
+    position:absolute;left:0;top:2px;width:30px;height:30px;border-radius:50%;
+    background:var(--accent);color:#111;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:.95rem}
+  .rules{list-style:none;padding:0;margin:0}
+  .rules li{padding:10px 0;border-bottom:1px solid var(--line)}
+  .rules li:last-child{border-bottom:none}
+  .rules strong{color:var(--accent)}
+  .price-card{background:linear-gradient(160deg,#1e2a35,#141b22);border:1px solid var(--accent);
+    border-radius:var(--radius);padding:24px;margin:12px 0}
+  .price-card .price{font-size:2.2rem;font-weight:800}
+  .price-card .price small{font-size:1rem;font-weight:400;color:var(--ink-soft)}
+  details{border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin:10px 0;background:var(--card)}
+  summary{font-weight:700;cursor:pointer}
+  details p{color:var(--ink-soft);margin:8px 0 0}
+  /* Free rep widget */
+  #freerep label{display:block;font-size:.9rem;color:var(--ink-soft);margin:14px 0 6px}
+  #freerep select,#freerep input,#freerep textarea{width:100%;padding:12px;border-radius:10px;
+    border:1px solid var(--line);background:#0c1116;color:var(--ink);font-size:1rem}
+  #freerep .row{display:flex;gap:10px}
+  #freerep .row>*{flex:1}
+  #rep-output{display:none}
+  #rep-output h3{margin:0 0 8px;font-size:1.05rem;color:var(--accent)}
+  #rep-output .rep-line{margin:8px 0}
+  #rep-output .rep-line strong{color:var(--ink)}
+  .hidden{display:none}
+  #signup-done .code{font-family:ui-monospace,monospace;background:#0c1116;border:1px dashed var(--accent);
+    border-radius:10px;padding:10px 14px;display:inline-block;margin:8px 0;font-size:1.1rem;letter-spacing:.06em}
+  footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--ink-soft);font-size:.85rem}
+  footer a{color:var(--accent);text-decoration:none}
+  .fineprint{font-size:.8rem;color:var(--ink-soft);margin-top:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">Practice<span>Loop</span></div>
+    <div class="pill">Founding cohort · $15/mo locked for life</div>
+  </header>
+
+  <div class="hero">
+    <h1>Stop watching tutorials. <em>Start doing reps.</em></h1>
+    <p>PracticeLoop gives you one small practice rep a day for any skill — English, coding, piano, interviews — sized to fit a busy life, with AI feedback on exactly what to fix next.</p>
+    <p>Built on a simple system: a daily <em>floor</em> so small it always counts (10–15 minutes), mistakes logged instead of hidden, and one fix at a time. Over weeks, your mistakes become your personal Skill Box — rules written from your patterns, approved by you.</p>
+    <div class="cta-row">
+      <a class="btn" href="#freerep">Get one free rep</a>
+      <a class="btn-ghost" href="#signup">Or join the waitlist directly ↓</a>
+    </div>
+  </div>
+
+  <section>
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li><strong>Pick your skill and your level.</strong></li>
+      <li><strong>Get today's rep</strong> — small, specific, doable today.</li>
+      <li><strong>Do it.</strong> Log what happened, especially the mistakes.</li>
+      <li><strong>Get one clear fix</strong> and tomorrow's rep. Watch your Skill Box grow.</li>
+    </ol>
+  </section>
+
+  <section id="freerep">
+    <h2>Your first rep is free</h2>
+    <p style="color:var(--ink-soft)">Pick a skill, answer two questions, and get one real rep — plus what good feedback looks like. The full version comes by email.</p>
+    <div class="card">
+      <label for="skill">Skill</label>
+      <select id="skill">
+        <option value="english">English speaking for work</option>
+        <option value="coding">Coding &amp; building with AI</option>
+        <option value="music">Music practice</option>
+        <option value="interview">Interview prep</option>
+        <option value="custom">My own skill</option>
+      </select>
+      <div class="row">
+        <div>
+          <label for="level">Level</label>
+          <select id="level">
+            <option>Beginner</option>
+            <option selected>Intermediate</option>
+            <option>Advanced</option>
+          </select>
+        </div>
+        <div>
+          <label for="goal">Goal (one line)</label>
+          <input id="goal" type="text" placeholder="e.g. speak up in meetings">
+        </div>
+      </div>
+      <div style="margin-top:16px">
+        <button class="btn" id="gen-rep" type="button">Generate my free rep</button>
+      </div>
+    </div>
+    <div class="card" id="rep-output" aria-live="polite">
+      <h3>Your free rep</h3>
+      <p class="rep-line"><strong>The rep:</strong> <span id="rep-task"></span></p>
+      <p class="rep-line"><strong>Done looks like:</strong> <span id="rep-done"></span></p>
+      <p class="rep-line"><strong>The one thing to watch:</strong> <span id="rep-watch"></span></p>
+      <p class="rep-line" style="color:var(--ink-soft)"><strong>What good feedback looks like:</strong> one thing that worked, <em>the</em> one fix with a one-line drill, and your mistake count celebrated — because a high mistake count is an honest rep, not a bad score.</p>
+      <p style="margin-top:14px"><a class="btn" href="#signup">Get the full version by email →</a></p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Why it works</h2>
+    <ul class="rules">
+      <li><strong>Floors, not marathons</strong> — a rep so small you can't say no to it.</li>
+      <li><strong>Never two misses in a row</strong> — one miss is life; two is a pattern.</li>
+      <li><strong>Mistakes are data</strong> — a high mistake count is an honest rep, not a bad score.</li>
+      <li><strong>One fix at a time</strong> — no overwhelming feedback dumps.</li>
+    </ul>
+  </section>
+
+  <section id="signup">
+    <h2>Founding pricing</h2>
+    <div class="price-card">
+      <div class="price">$15<small>/month, locked for life</small></div>
+      <p style="color:var(--ink-soft);margin:10px 0 0">The first cohort opens after this sprint — join the waitlist, invite 3 friends to skip the queue. Founding members shape the product.</p>
+    </div>
+    <div class="card" id="signup-form-card">
+      <label for="s-name" style="font-size:.9rem;color:var(--ink-soft);display:block;margin-bottom:6px">Name</label>
+      <input id="s-name" type="text" placeholder="Your name" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:#0c1116;color:var(--ink);font-size:1rem;margin-bottom:12px">
+      <label for="s-email" style="font-size:.9rem;color:var(--ink-soft);display:block;margin-bottom:6px">Email</label>
+      <input id="s-email" type="email" placeholder="you@example.com" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:#0c1116;color:var(--ink);font-size:1rem;margin-bottom:16px">
+      <button class="btn" id="join" type="button">Join the waitlist</button>
+      <p class="fineprint">One email per week during the sprint. No spam, ever. Unsubscribe anytime.</p>
+    </div>
+    <div class="card hidden" id="signup-done">
+      <h3 style="margin-top:0">You're in the loop. 🎯</h3>
+      <p style="color:var(--ink-soft)">You're on the waitlist — we'll email <strong id="done-email"></strong> when the founding cohort opens.</p>
+      <p style="color:var(--ink-soft)"><strong>Skip the queue:</strong> invite 3 friends with your link.</p>
+      <div class="code" id="ref-code">PL-0000</div><br>
+      <button class="btn" id="copy-ref" type="button" style="margin-top:10px">Copy my referral link</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Questions</h2>
+    <details open>
+      <summary>Which skills?</summary>
+      <p>Start with English speaking, coding with AI, music, and interview prep — or bring your own skill.</p>
+    </details>
+    <details>
+      <summary>How much time?</summary>
+      <p>A floor rep is 10–15 minutes. Good days have a bigger target, but the floor always counts.</p>
+    </details>
+    <details>
+      <summary>Is this another course?</summary>
+      <p>No videos to binge. You practice from day one; the AI only guides and gives feedback.</p>
+    </details>
+    <details>
+      <summary>When does it launch?</summary>
+      <p>The founding cohort opens once the waitlist proves demand. Founding members shape the product.</p>
+    </details>
+  </section>
+
+  <footer>
+    <p>PracticeLoop is built by <strong>Marcus N</strong> — founder is user #1. He runs this exact system every day: English at 13:30, technical at 17:00, piano at 21:00.</p>
+    <p>Follow the expedition: <a href="https://beyondthewalls.quest">beyondthewalls.quest</a></p>
+    <p class="fineprint">© 2026 PracticeLoop. Watching is not practicing.</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var REPS = {
+    english: {
+      task: "Record a 60-second voice note summarizing your current task as if updating your manager. One idea per sentence — then stop.",
+      done: "60 seconds recorded, no sentence longer than 20 words.",
+      watch: "Long, unstructured sentences. Cut each sentence after one idea, then stop."
+    },
+    coding: {
+      task: "Ask an AI to write one small function, then review its output line by line and name the single test that would prove it works.",
+      done: "One function reviewed, and the name of one test written down.",
+      watch: "Happy-path approval. Name the test that would fail if the code were wrong."
+    },
+    music: {
+      task: "Play one 8-bar passage slowly, naming each note aloud. Log every stumble.",
+      done: "Passage played, every stumble written down.",
+      watch: "Rushing to full tempo. Stay slow until the stumbles stop."
+    },
+    interview: {
+      task: "Answer one behavioral question out loud in 90 seconds: situation, action, result — in that order.",
+      done: "90 seconds, all three parts present.",
+      watch: "Wandering backstory. Cut to the action within two sentences."
+    },
+    custom: {
+      task: "Pick the smallest part of your skill. Do it once today, slowly, and write down the one thing that felt wrong.",
+      done: "One attempt logged with one named mistake.",
+      watch: "Picking a rep that's too big. Halve it."
+    }
+  };
+
+  document.getElementById('gen-rep').addEventListener('click', function(){
+    var key = document.getElementById('skill').value;
+    var rep = REPS[key] || REPS.custom;
+    var goal = document.getElementById('goal').value.trim();
+    document.getElementById('rep-task').textContent = rep.task + (goal ? " Goal kept in view: " + goal + "." : "");
+    document.getElementById('rep-done').textContent = rep.done;
+    document.getElementById('rep-watch').textContent = rep.watch;
+    var out = document.getElementById('rep-output');
+    out.style.display = 'block';
+    out.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  document.getElementById('join').addEventListener('click', function(){
+    var email = document.getElementById('s-email').value.trim();
+    var name = document.getElementById('s-name').value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      alert('Please enter a valid email address.');
+      return;
+    }
+    // Email capture backend: Google Form (free, $0). To wire it, create a Google
+    // Form with two short-answer fields (Name, Email), then paste below:
+    //   1. the form's /formResponse URL (from the form's "Send" link, replace
+    //      /viewform with /formResponse), and
+    //   2. the entry IDs for the Name and Email fields (from the form's
+    //      pre-filled-link HTML: entry.123456789).
+    // Until both are filled in, signups show the success screen and are kept
+    // in the browser's localStorage as a backup — nothing is lost.
+    var FORM_RESPONSE_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdiw58srV_qZpZw5S3-XFZCyeQxEc63vK-oFIB-BQvYocT-7Q/formResponse';
+    var ENTRY_NAME  = 'entry.1947868113';
+    var ENTRY_EMAIL = 'entry.1354815156';
+    var wired = FORM_RESPONSE_URL && ENTRY_NAME && ENTRY_EMAIL;
+    var code = 'PL-' + Math.random().toString(36).slice(2,6).toUpperCase();
+    var payload = {name: name, email: email, code: code, at: new Date().toISOString()};
+    try {
+      var keep = JSON.parse(localStorage.getItem('pl-waitlist') || '[]');
+      keep.push(payload);
+      localStorage.setItem('pl-waitlist', JSON.stringify(keep));
+    } catch(e) { /* storage unavailable — still fine */ }
+    if (wired) {
+      var body = new URLSearchParams();
+      body.append(ENTRY_NAME, name);
+      body.append(ENTRY_EMAIL, email);
+      fetch(FORM_RESPONSE_URL, {method: 'POST', mode: 'no-cors', body: body})
+        .catch(function(){ /* localStorage backup above keeps the signup */ });
+    }
+    document.getElementById('done-email').textContent = email;
+    document.getElementById('ref-code').textContent = code;
+    document.getElementById('signup-form-card').classList.add('hidden');
+    var done = document.getElementById('signup-done');
+    done.classList.remove('hidden');
+    done.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  document.getElementById('copy-ref').addEventListener('click', function(){
+    var code = document.getElementById('ref-code').textContent;
+    var link = 'https://beyondthewalls.quest/waitlist?ref=' + code; // live URL on his Cloudflare Pages pipeline
+    var done = function(){ document.getElementById('copy-ref').textContent = 'Copied ✓'; };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(link).then(done, done);
+    } else { done(); }
+  });
+})();
+</script>
+</body>
+</html>
