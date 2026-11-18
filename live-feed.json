@@ -31,9 +31,9 @@
       "title": "First-Step Clinic $5 PayPal link"
     },
     {
-      "detail": "Re-tested Tue Nov 17 ~08:50: /root/.ssh/config was MISSING again (VM rebuild) — restored from durable /home/hatch/.ssh/config via restore-mac-ssh.sh — but ssh still fails at the tunnel: 'proxy closed during CONNECT / Connection closed by UNKNOWN port 65535'. Same Tailscale/VPN-family failure as Nov 5–16. Unblocker unchanged: Marcus checks his Mac (Tailscale ON, VPN off). Live site still shows the Day 6 feed; workspace copy is at the Nov 17 version.",
-      "status": "blocked",
-      "title": "Mac push route — re-tested Nov 17, config restored, tunnel still down"
+      "detail": "RESTORED Wed Nov 18 ~09:00: /root/.ssh/config was missing again (VM rebuild) — restored from durable copy — and this time the tunnel WORKED: ssh to the Mac succeeded (MAC_OK, Mac.lan) after being down since Nov 5. Pushed commit 84ae59d (live-feed.json Day 27 + waitlist/index.html) to github.com:quynguyen2303/beyond-the-walls-site; verified live — beyondthewalls.quest/live-feed.json now serves Day 27 (no longer stale Day 6) and beyondthewalls.quest/waitlist/ returns 200. The 13-day stale-feed state is closed.",
+      "status": "waiting",
+      "title": "Mac push route — RESTORED Nov 18, feed + waitlist published"
     },
     {
       "detail": "Resolved 2026-11-06 at doc level: Shopee publishes NO hard cap (Seller Education Hub SG/PH + Open Platform dev guide); SG recommends 25–100 chars. '120' is a third-party app enforcing 120 in its own tool; '150' is a 2025 guide citing 2024 guidelines. Prompt-pack §4 updated: Shopee 120 hard ceiling, aim ≤100. TikTok 25–200 and Lazada 2–255 confirmed from official docs Oct 31. VN live-form check still needs Marcus's seller-login approval.",
